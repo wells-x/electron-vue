@@ -1,12 +1,18 @@
 {
-  "name": "v3.4.1",
+  "name": "test-app",
   "version": "0.1.0",
+  "description": "test-app-vue",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
   },
+  "author": "wells_xq",
   "dependencies": {
     "register-service-worker": "^1.5.2",
     "vue": "^2.6.6",
@@ -19,11 +25,14 @@
     "@vue/cli-plugin-pwa": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "babel-eslint": "^10.0.1",
+    "electron": "^4.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "fibers": "^3.1.1",
     "sass": "^1.16.0",
     "sass-loader": "^7.1.0",
+    "vue-cli-plugin-electron-builder": "^1.1.0",
     "vue-template-compiler": "^2.5.21"
-  }
+  },
+  "main": "background.js"
 }
