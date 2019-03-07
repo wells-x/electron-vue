@@ -1,8 +1,8 @@
 'use strict';
 
-import {app, protocol, BrowserWindow, Tray,} from 'electron';
+import {app, protocol, BrowserWindow, Tray, Menu, MenuItem} from 'electron';
 import path from 'path'
-import {createProtocol,} from 'vue-cli-plugin-electron-builder/lib'
+import {createProtocol,/*installVueDevtools*/} from 'vue-cli-plugin-electron-builder/lib'
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -12,35 +12,20 @@ let win;
 
 // Standard scheme must be registered before the app is ready
 protocol.registerStandardSchemes(['app'], {secure: true});
+let icon = path.join(__dirname, '../build/icon.ico');
 
 function createWindow() {
-    /**
-     * @author wells
-     * @date 2019/3/4
-     * @description: 此处获取APPicon 持续失败
-     */
-    /*try {
-        let appIcon = new Tray(process.env.WEBPACK_DEV_SERVER_URL+'/img/logo.82b9c7a5.png');
-    }catch (e) {
-        console.log(e);
-    }*/
-    /*const {width, height} = screen.getPrimaryDisplay().workAreaSize
-    win = new BrowserWindow({
-        width, height,
-        frame: false,
-        transparent: true,
-        icon: path.join(__dirname, '../src/assets/logo.png'),
-    })*/
     // Create the browser window.
     win = new BrowserWindow({
         width: 800,
         height: 600,
+        resizable: true,
+        fullscreenable: true,
         // frame: false,
-        transparent: true,
-        icon: path.join(__dirname, '../src/assets/logo.png'),
+        // transparent: true,
+        icon,
     });
 
-    // win.setOverlayIcon('path/to/overlay.png', 'Description for overlay')
     if (process.env.WEBPACK_DEV_SERVER_URL) {
         // Load the url of the dev server if in development mode
         win.loadURL(process.env.WEBPACK_DEV_SERVER_URL);
@@ -87,21 +72,74 @@ app.on('ready', async() => {
         }
     }
     createWindow();
-    /*powerMonitor.on('suspend', () => {
-        console.log('The system is going to sleep')
-    })*/
-    win.setProgressBar(0.5);
-    new Tray(path.join(__dirname, '../src/assets/logo.png'));
     win.setThumbarButtons([
         {
-            tooltip: 'button2',
+            tooltip: 'button1',
+            icon,
+            click() {
+                console.log('button1 clicked')
+            }
+        },
+        /*{
+            tooltip: 'button1',
             icon: path.join(__dirname, '../src/assets/logo.png'),
-            flags: ['enabled', 'dismissonclick'],
             click() {
                 console.log('button2 clicked.')
             }
-        }
+        },*/
     ]);
+    /*// 多重图标
+    win.setOverlayIcon(icon, 'Description for overlay');*/
+    /*// 进度条
+    win.setProgressBar(0.1);
+    setTimeout(() => {
+        win.setProgressBar(0.5);
+        setTimeout(() => {
+            win.setProgressBar(1.0);
+            setTimeout(() => {
+                win.setProgressBar(0);
+            }, 1000)
+        }, 2000)
+    }, 2000);*/
+
+    // 托盘
+    let tray = new Tray(icon);
+    tray.setToolTip('这个是tooltip');
+    /*const contextMenu = Menu.buildFromTemplate([
+        {label: 'Item1', type: 'radio'},
+        {label: 'Item2', type: 'radio'},
+        {label: 'Item3', type: 'radio', checked: true},
+        {label: 'Item4', type: 'radio'}
+    ]);*/
+    const contextMenu = new Menu();
+    contextMenu.append(new MenuItem({
+        label: 'one',
+        click() {
+            console.log("one");
+        }
+    }));
+    contextMenu.append(new MenuItem({
+        label: 'two',
+        // icon,
+        click() {
+            console.log("two");
+        }
+    }));
+    contextMenu.append(new MenuItem({type: 'separator'}));
+    contextMenu.append(new MenuItem({
+        label: "退出",
+        role: 'quit'
+    }));
+    tray.setToolTip('This is my application.');
+    tray.setContextMenu(contextMenu);
+    setTimeout(()=>{},2000);
+    // tray.setContextMenu(new Menu())
+
+    /*// 右下角通知
+    tray.displayBalloon({
+        title: 'disBall',
+        content: 'test',
+    });*/
 
 });
 
