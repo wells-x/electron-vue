@@ -2,7 +2,7 @@
 
 import {app, protocol, BrowserWindow, Tray, Menu, MenuItem} from 'electron';
 import path from 'path'
-import {createProtocol,/*installVueDevtools*/} from 'vue-cli-plugin-electron-builder/lib'
+import {createProtocol, installVueDevtools} from 'vue-cli-plugin-electron-builder/lib'
 
 const isDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -66,7 +66,7 @@ app.on('ready', async() => {
         // Install Vue Devtools
         try {
             // 启动是检测 vue devtool 失败
-            // await installVueDevtools()
+            await installVueDevtools()
         } catch (e) {
             console.error('Vue Devtools failed to install:', e.toString())
         }
@@ -132,7 +132,8 @@ app.on('ready', async() => {
     }));
     tray.setToolTip('This is my application.');
     tray.setContextMenu(contextMenu);
-    setTimeout(()=>{},2000);
+    setTimeout(() => {
+    }, 2000);
     // tray.setContextMenu(new Menu())
 
     /*// 右下角通知

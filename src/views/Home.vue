@@ -4,6 +4,7 @@
         <!--<HelloWorld msg="Welcome to Your Vue.js App"/>-->
         <main>
             <button @click="notice">ssss</button>
+            <span @click="$router.push({name: 'login'})">登录</span>
         </main>
     </div>
 </template>
