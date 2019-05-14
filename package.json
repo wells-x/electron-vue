@@ -1,6 +1,8 @@
 {
   "name": "electron",
   "version": "0.1.0",
+  "author": "wells_xq",
+  "description": "test-app-vue",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
