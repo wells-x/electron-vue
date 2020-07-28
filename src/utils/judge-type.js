@@ -4,7 +4,7 @@
  * Description: ""
  * Change: wells_xiaoqiang
  */
-let ots = Object.prototype.toString;
+const ots = Object.prototype.toString;
 
 /**
  * 判断是否数组
@@ -15,8 +15,8 @@ let ots = Object.prototype.toString;
  * @param {Object} o 判断对象
  * @return {boolean} 是否数组
  */
-export function isArray (o) {
-    return o && (o.constructor === Array || ots.call(o) === "[object Array]" || Array.isArray(o));
+export function isArray(o) {
+  return o && (o.constructor === Array || ots.call(o) === "[object Array]" || Array.isArray(o));
 }
 
 /**
@@ -28,8 +28,8 @@ export function isArray (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否Object
  */
-export function isObject (o) {
-    return o && (o.constructor === Object || ots.call(o) === "[object Object]");
+export function isObject(o) {
+  return o && (o.constructor === Object || ots.call(o) === "[object Object]");
 }
 
 /**
@@ -41,8 +41,8 @@ export function isObject (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否布尔类型
  */
-export function isBoolean (o) {
-    return (o === false || o) && (o.constructor === Boolean);
+export function isBoolean(o) {
+  return (o === false || o) && (o.constructor === Boolean);
 }
 
 /**
@@ -54,8 +54,8 @@ export function isBoolean (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否数值类型
  */
-export function isNumber (o) {
-    return (o === 0 || o) && o.constructor === Number;
+export function isNumber(o) {
+  return (o === 0 || o) && o.constructor === Number;
 }
 
 /**
@@ -67,8 +67,8 @@ export function isNumber (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否undefined
  */
-export function isUndefined (o) {
-    return typeof(o) === "undefined";
+export function isUndefined(o) {
+  return typeof (o) === "undefined";
 }
 
 /**
@@ -80,8 +80,8 @@ export function isUndefined (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否Null
  */
-export function isNull (o) {
-    return o === null;
+export function isNull(o) {
+  return o === null;
 }
 
 /**
@@ -92,8 +92,8 @@ export function isNull (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否function
  */
-export function isFunction (o) {
-    return o && (o.constructor === Function);
+export function isFunction(o) {
+  return o && (o.constructor === Function);
 }
 
 /**
@@ -105,6 +105,6 @@ export function isFunction (o) {
  * @param {Object} o 判断对象
  * @return {boolean} 是否字符串
  */
-export function isString (o) {
-    return (o === "" || o) && (o.constructor === String);
+export function isString(o) {
+  return (o === "" || o) && (o.constructor === String);
 }
